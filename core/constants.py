@@ -51,5 +51,5 @@ PYTHON_QUESTION_LIST = [
       "question_text": "What is the output of the following code?\n\nx = [1, 2, 3]\ny = x\nx.append(4)\nprint(y)",
       "options": ["[1, 2, 3, 4]", "[1, 2, 3]", "[1, 2, 3, 4, 4]", "Error"],
       "answer": "[1, 2, 3, 4]",
-    }
+    },
   ]
