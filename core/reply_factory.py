@@ -4,6 +4,8 @@ from .constants import BOT_WELCOME_MESSAGE, PYTHON_QUESTION_LIST
 
 def generate_bot_responses(message, session):
     bot_responses = []
+    if session is None:
+        return ["Session is not initialized."]
 
     current_question_id = session.get("current_question_id")
     if not current_question_id:
@@ -32,6 +34,7 @@ def record_current_answer(answer, current_question_id, session):
     '''
     Validates and stores the answer for the current question to django session.
     '''
+    session[f"answer_{current_question_id}"] = answer
     return True, ""
 
 
@@ -48,5 +51,8 @@ def generate_final_response(session):
     Creates a final result message including a score based on the answers
     by the user for questions in the PYTHON_QUESTION_LIST.
     '''
+    answers = [session.get(f"answer_{i}") for i in range(len(PYTHON_QUESTION_LIST))]
+    score = sum(1 for answer in answers if answer == "correct")  # Example scoring logic
+    return f"Your final score is {score} out of {len(PYTHON_QUESTION_LIST)}."
 
     return "dummy result"
